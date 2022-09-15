@@ -23,6 +23,7 @@ import com.francescomalagrino.controllers.AccountController;
 import com.francescomalagrino.controllers.RestApiController;
 import com.francescomalagrino.models.Account;
 import com.francescomalagrino.services.AccountService;
+import com.francescomalagrino.services.SafeService;
 import com.sun.tools.javac.util.Assert;
 
 
@@ -33,7 +34,8 @@ class AccountControllerTest {
 	private MockMvc mockMvc;
 	  
     @InjectMocks AccountController accountController;
-
+    
+    @InjectMocks SafeService safeService;
     
     @Mock
     private Account account;
@@ -128,6 +130,35 @@ class AccountControllerTest {
 
 
 	 	  }
+	 	 
+	 	 
+	 	 @Test
+	 	void calulateNotes50() {
+	 		int fifty = 50;
+		 	assertEquals("You are now recieving [fiftys= " +1 + "]", safeService.calulateNotes(fifty));
+
+	 	 }
+	 	 
+		 @Test
+		 	void calulateNotes20() {
+		 		int twenty = 20;
+			 	assertEquals("You are now recieving [fiftys= 0, twentys= 1]", safeService.calulateNotes(twenty));
+		 	 }
+		 
+		 
+		 @Test
+		 	void calulateNotes10() {
+		 		int tens = 10;
+			 	assertEquals("You are now recieving [fiftys= 0, twentys= 0, tens=1]", safeService.calulateNotes(tens));
+		 	 }
+		 
+		 
+
+		 @Test
+		 	void calulateNotes5() {
+		 		int fives = 5;
+			 	assertEquals("You are now recieving [fiftys= 0, twentys= 0, tens=0, fives=1]", safeService.calulateNotes(fives));
+		 	 }
 	 	 
 
 
